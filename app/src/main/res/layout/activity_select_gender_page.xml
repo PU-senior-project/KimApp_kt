@@ -100,6 +100,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.068" />
 
+<<<<<<< HEAD
+=======
+        <TextView
+            android:id="@+id/txt_data"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="123"
+            android:textColor="@color/white" />
+
+>>>>>>> ecafd13 (10/24)
     </LinearLayout>
 
     <LinearLayout
@@ -139,6 +150,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.068" />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecafd13 (10/24)
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
