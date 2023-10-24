@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#2E2E2E</color>
+    <color name="startbutton">#F5F49B</color>
+    <color name="titleback">#6A6D76</color>
+    <color name="shootingback">#767A67</color>
+    <color name="selectgender">#922323</color>
+    <color name="selectmaterial">#142137</color>
+</resources>
