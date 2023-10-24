@@ -3,6 +3,7 @@ package com.example.kimapp_mainkl
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
