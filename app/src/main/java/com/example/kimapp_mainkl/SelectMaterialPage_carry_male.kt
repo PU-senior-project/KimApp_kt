@@ -9,10 +9,10 @@ import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
 
-class SelectMaterialPage_carry : AppCompatActivity() {
+class SelectMaterialPage_carry_male : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select_material_page_carry)
+        setContentView(R.layout.activity_select_material_page_carry_male)
 
         val imageButton_selectMaterial_back = findViewById<ImageButton>(R.id.imageButton_selectMaterial_back)
         val select_material_page_transport_next = findViewById<Button>(R.id.select_material_page_transport_next)

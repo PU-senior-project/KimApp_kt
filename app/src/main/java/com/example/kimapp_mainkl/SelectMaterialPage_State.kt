@@ -21,7 +21,7 @@ class SelectMaterialPage_State : AppCompatActivity() {
         select_material_page_state_next.setBackgroundColor(Color.rgb(245,244,155))
 
         imageButton_selectMaterial_state_back.setOnClickListener{
-            val intent = Intent(this,SelectMaterialPage_carry::class.java);
+            val intent = Intent(this,SelectMaterialPage_carry_male::class.java);
             startActivity(intent);
         }
 

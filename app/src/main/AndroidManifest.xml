@@ -13,13 +13,16 @@
         android:theme="@style/Theme.KimAppmainKL"
         tools:targetApi="31">
         <activity
+            android:name=".SelectMaterialPage_carry_female"
+            android:exported="false" />
+        <activity
             android:name=".SelectMaterialPage_WorkTime"
             android:exported="false" />
         <activity
             android:name=".SelectMaterialPage_State"
             android:exported="false" />
         <activity
-            android:name=".SelectMaterialPage_carry"
+            android:name=".SelectMaterialPage_carry_male"
             android:exported="false" />
         <activity
             android:name=".SelectGenderPage"

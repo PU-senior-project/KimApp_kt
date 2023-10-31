@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".SelectMaterialPage_carry">
+    tools:context=".SelectMaterialPage_carry_male">
 
     <ImageButton
         android:id="@+id/imageButton_selectMaterial_worktime_back"

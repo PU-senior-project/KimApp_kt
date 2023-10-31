@@ -30,9 +30,17 @@ class SelectPage : AppCompatActivity() {
             startActivity(intent);
         }
 
-        button_selectmetarial.setOnClickListener{
-            val intent = Intent(this,SelectMaterialPage_carry::class.java)
-            startActivity(intent);
+        if(DataProvider.getData("Gender_Of_gender")==1){
+            button_selectmetarial.setOnClickListener{
+                val intent = Intent(this,SelectMaterialPage_carry_male::class.java)
+                startActivity(intent);
+            }
+        }else if(DataProvider.getData("Gender_Of_gender")==0){
+            button_selectmetarial.setOnClickListener{
+                val intent = Intent(this,SelectMaterialPage_carry_female::class.java)
+                startActivity(intent);
+            }
         }
+
     }
 }

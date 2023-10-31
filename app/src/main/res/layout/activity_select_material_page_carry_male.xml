@@ -8,7 +8,7 @@
     tools:context=".SelectMaterialPage_carry_male">
 
     <ImageButton
-        android:id="@+id/imageButton_selectMaterial_state_back"
+        android:id="@+id/imageButton_selectMaterial_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/background"
@@ -78,9 +78,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="工作狀態評級"
-            android:textSize="35dp"
             android:textStyle="bold"
+            android:text="搬運物實際負荷"
+            android:textSize="35dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.078"
@@ -89,45 +89,60 @@
             app:layout_constraintVertical_bias="0.045" />
 
         <RadioGroup
-            android:id="@+id/radiogroup_state"
+            android:id="@+id/radiogroup_transport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintHorizontal_bias="0.037"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
-            app:layout_constraintVertical_bias="0.577">
+            app:layout_constraintVertical_bias="0.581">
 
             <RadioButton
-                android:id="@+id/radio_state_1"
+                android:id="@+id/radio_transport_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=" 具備良好的人因條件"
-                android:tag="0"/>
-
-            <RadioButton
-                android:id="@+id/radio_state_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text=" 運動空間受限或不符合人因的條件"
+                android:text=" &lt; 10 kg"
                 android:tag="1"/>
 
             <RadioButton
-                android:id="@+id/radio_state_3"
+                android:id="@+id/radio_transport_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=" 運動空間受限或重心不穩的荷重"
+                android:text=" 10 ~ 20 kg"
                 android:tag="2"/>
 
+            <RadioButton
+                android:id="@+id/radio_transport_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text=" 20 ~ 30 kg"
+                android:tag="4"/>
+
+            <RadioButton
+                android:id="@+id/radio_transport_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text=" 30 ~ 40 kg"
+                android:tag="7"/>
+
+            <RadioButton
+                android:id="@+id/radio_transport_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text=" &gt;= 40 kg"
+                android:tag="25"/>
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/select_material_page_state_next"
+        android:id="@+id/select_material_page_transport_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="下一頁"

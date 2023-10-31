@@ -9,7 +9,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class ImageAdapter(private val context: Context,private val imageList: List<ImageItem>) : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
+class cls_ImageAdapter(private val context: Context, private val imageList: List<ImageItem>) : RecyclerView.Adapter<cls_ImageAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         val imageView: ImageView = itemView.findViewById(R.id.imageView)

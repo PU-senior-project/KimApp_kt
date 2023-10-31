@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
@@ -27,14 +25,14 @@ class OperationPage : AppCompatActivity() {
 
         recycler_view.layoutManager = layoutManager
 
-        val itemDecoration = ImageAdapter.VerticalSpaceItemDecoration(0)
+        val itemDecoration = cls_ImageAdapter.VerticalSpaceItemDecoration(0)
         recycler_view.addItemDecoration(itemDecoration)
 
         val imageList = listOf(
             ImageItem(R.drawable.total)
         )
 
-        val adapter = ImageAdapter(this,imageList)
+        val adapter = cls_ImageAdapter(this,imageList)
         recycler_view.adapter = adapter
 
         imageButton_backfirst.setOnClickListener{
