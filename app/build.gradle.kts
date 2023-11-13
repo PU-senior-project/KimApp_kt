@@ -38,6 +38,7 @@ android {
 
 dependencies {
 
+
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.5.0")
     implementation("com.google.android.material:material:1.10.0")
@@ -47,5 +48,10 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.itextpdf:itext7-core:7.1.16")
+//    implementation ("com.tom_roush:pdfbox-android:1.8.10.3")
 
+    implementation ("org.tensorflow:tensorflow-lite:2.8.0")
+    implementation ("org.tensorflow:tensorflow-lite-gpu:2.5.0")
+    implementation ("org.tensorflow:tensorflow-lite-support:0.3.0")
 }

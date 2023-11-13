@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">KimApp-mainKL</string>
+    <string name="tfe_pe_app_name">PoseMon</string>
+    <string name="tfe_pe_request_permission">This app needs camera permission.</string>
+    <string name="tfe_pe_tv_score">辨識分數: %.2f</string>
+    <string name="tfe_pe_tv_model">Model: MoveNet Thunder</string>
+    <string name="tfe_pe_tv_fps">Fps: %d</string>
+    <string name="tfe_pe_tv_debug">Debug資訊: %s</string>
+    <string name="tfe_pe_tv_device">運算模式: </string>
+    <string name="tfe_pe_tv_camera">切換鏡頭: </string>
+    <string-array name="tfe_pe_device_name">
+        <item>CPU</item>
+        <item>GPU</item>
+        <item>NNAPI</item>
+    </string-array>
+    <string-array name="tfe_pe_camera_name">
+        <item>Back</item>
+        <item>Front</item>
+    </string-array>
 </resources>

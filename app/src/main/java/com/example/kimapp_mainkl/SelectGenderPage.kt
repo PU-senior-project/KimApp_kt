@@ -20,14 +20,15 @@ class SelectGenderPage : AppCompatActivity() {
         }
 
         //選擇性別savedata為儲存值
-        maleImageButton.setOnClickListener {
-            DataProvider.saveData("Gender_Of_gender", 1)
+        
+        femaleImageButton.setOnClickListener {
+            DataProvider.saveData("Gender_Of_value", 0)
             val intent = Intent(this,SelectPage::class.java)
             startActivity(intent);
         }
 
-        femaleImageButton.setOnClickListener {
-            DataProvider.saveData("Gender_Of_gender", 0)
+        maleImageButton.setOnClickListener {
+            DataProvider.saveData("Gender_Of_value", 1)
             val intent = Intent(this,SelectPage::class.java)
             startActivity(intent);
         }

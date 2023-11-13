@@ -14,7 +14,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:layout_marginTop="40dp"
         app:cardBackgroundColor="@color/titleback"
         app:cardCornerRadius="16dp"
@@ -29,10 +29,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="326dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="人因工程危害檢測軟體"
+            android:gravity="center"
+            android:text="人因工程風險危害\n智慧評核系統"
             android:textColor="@color/white"
             android:textSize="30dp" />
 
@@ -41,7 +41,7 @@
     <View
         android:layout_width="350dp"
         android:layout_height="350dp"
-        android:background="@drawable/rectanglewhite"
+        android:background="@drawable/rectangleyellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
     <View
         android:layout_width="330dp"
         android:layout_height="330dp"
-        android:background="@drawable/rectangleyellow"
+        android:background="@drawable/rectanglewhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
