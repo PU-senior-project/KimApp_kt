@@ -35,6 +35,8 @@ class VideoPage : AppCompatActivity() {
         private const val FRAGMENT_DIALOG = "dialog"
     }
 
+
+
     private lateinit var surfaceView: SurfaceView
 
     private var device = Device.CPU
@@ -52,8 +54,6 @@ class VideoPage : AppCompatActivity() {
     private var label5Counter = 0
     private var label15Counter = 0
     private var label20Counter = 0
-
-    var selectedValue_camera = 0
 
     /** 最终姿态 */
     private var poseLevel = "label_0"
@@ -114,25 +114,17 @@ class VideoPage : AppCompatActivity() {
         setContentView(R.layout.activity_video)
 
         val downButton = findViewById<Button>(R.id.downButton)
-        val toolbarback = findViewById<Toolbar>(R.id.toolbarback)
+        val imageButton_cameraback = findViewById<ImageButton>(R.id.imageButton_cameraback)
 
-        downButton.setOnClickListener{
+
+        imageButton_cameraback.setOnClickListener {
             val intent = Intent(this,SelectPage::class.java)
             startActivity(intent);
         }
 
-        setSupportActionBar(toolbarback)
-
-        // 获取 ActionBar 实例
-        val actionBar: androidx.appcompat.app.ActionBar? = supportActionBar
-
-        // 启用返回按钮
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-
-        // 设置返回按钮的行为
-        toolbarback.setNavigationOnClickListener {
-            // 返回到上一个屏幕
-            NavUtils.navigateUpFromSameTask(this)
+        downButton.setOnClickListener {
+            val intent = Intent(this,SelectPage::class.java)
+            startActivity(intent);
         }
 
         /** 程序运行时保持屏幕常亮 */
@@ -191,6 +183,20 @@ class VideoPage : AppCompatActivity() {
         val shutterButton: Button = findViewById(R.id.button3)
         shutterButton.text = "拍攝"
         println(poseLevel)
+        when{
+            poseLevel == "label_0"->{
+                DataProvider.saveData("selectedValue_camera",0)
+            }
+            poseLevel == "label_5"->{
+                DataProvider.saveData("selectedValue_camera",5)
+            }
+            poseLevel == "label_15"->{
+                DataProvider.saveData("selectedValue_camera",10)
+            }
+            poseLevel == "label_20"->{
+                DataProvider.saveData("selectedValue_camera",20)
+            }
+        }
         isPoseClassificationEnabled = false
     }
 
@@ -221,6 +227,7 @@ class VideoPage : AppCompatActivity() {
 
     private fun openCamera() {
         if (isCameraPermissionGranted()) {
+            println("權限授權成功 Granted")
             if (cameraSource == null) {
                 cameraSource =
                     CameraSource(surfaceView, selectedCamera, object : CameraSource.CameraSourceListener {
@@ -254,7 +261,6 @@ class VideoPage : AppCompatActivity() {
                                         /** 設定姿態為 label_0 */
                                         if (label0Counter > 30 && poseLevel != "label_20" && poseLevel != "label_15" && poseLevel != "label_5") {
                                             poseLevel = "label_0"
-                                            selectedValue_camera = 0
                                         }
 
                                         /** 顯示 Debug 訊息 */
@@ -276,7 +282,6 @@ class VideoPage : AppCompatActivity() {
                                         /** 設定姿態為 label_5 */
                                         if (label5Counter > 30 && poseLevel != "label_20" && poseLevel != "label_15") {
                                             poseLevel = "label_5"
-                                            selectedValue_camera = 5
                                         }
 
                                         /** 顯示 Debug 訊息 */
@@ -298,7 +303,6 @@ class VideoPage : AppCompatActivity() {
                                         /** 設定姿態為 label_15 */
                                         if (label15Counter > 30 && poseLevel != "label_20") {
                                             poseLevel = "label_15"
-                                            selectedValue_camera = 10
                                         }
 
                                         /** 顯示 Debug 訊息 */
@@ -320,7 +324,6 @@ class VideoPage : AppCompatActivity() {
                                         /** 設定姿態為 label_20 */
                                         if (label20Counter > 30) {
                                             poseLevel = "label_20"
-                                            selectedValue_camera = 20
                                         }
                                         /** 顯示 Debug 訊息 */
                                         tvDebug.text = getString(

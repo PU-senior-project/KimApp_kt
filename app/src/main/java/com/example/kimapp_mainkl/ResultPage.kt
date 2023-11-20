@@ -1,5 +1,6 @@
 package com.example.kimapp_mainkl
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -13,14 +14,13 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.itextpdf.kernel.pdf.PdfDocument
+//import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfName
+import com.itextpdf.kernel.pdf.PdfName.Document
 import com.itextpdf.kernel.pdf.PdfReader
 import com.itextpdf.kernel.pdf.PdfWriter
-import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
-//import com.tom_roush.pdfbox.pdmodel.PDDocument
-//import com.tom_roush.pdfbox.pdmodel.PDPageContentStream
-//import com.tom_roush.pdfbox.pdmodel.font.PDType1Font
+import com.itextpdf.layout.Document
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -28,96 +28,55 @@ import java.io.IOException
 class ResultPage : AppCompatActivity() {
 
     private var currentColor: Int = Color.GREEN
+//    private var Level: Int = 0  // 將 Level 定義為成員變數
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_page)
 
-        val centerText = findViewById<TextView>(R.id.txt_Level)
         val imageButton_retry = findViewById<ImageButton>(R.id.imageButton_retry)
         val imageButton_download = findViewById<ImageButton>(R.id.imageButton_download)
-
-//        val selectedValue_WorkTime_string = DataProvider.getData("selectedValue_WorkTime") as? String
-//        val selectedValue_carry_string = DataProvider.getData("selectedValue_carry") as? String
-//        val selectedValue_state_string = DataProvider.getData("selectedValue_state") as? String
-//        val selectedValue_camera_string = DataProvider.getData("selectedValue_camera") as? String
 
         val selectedValue_WorkTime = DataProvider.getData("selectedValue_WorkTime") as? Int
         val selectedValue_carry = DataProvider.getData("selectedValue_carry") as? Int
         val selectedValue_state = DataProvider.getData("selectedValue_state") as? Int
         val selectedValue_camera = DataProvider.getData("selectedValue_camera")as? Int
 
+        finalLevel(selectedValue_WorkTime?: 0,selectedValue_carry ?: 0, selectedValue_state ?: 0, selectedValue_camera ?: 0)
 
-        if (selectedValue_WorkTime != null && selectedValue_carry != null && selectedValue_state != null && selectedValue_camera != null) {
-            val Level =
-                selectedValue_WorkTime * (selectedValue_carry + selectedValue_state + selectedValue_camera)
-            changeColor(Level)
-        }
+
+
 
         imageButton_retry.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent);
         }
 
-//        imageButton_download.setOnClickListener {
-//            // PDF文件的路径
-//            val originalPdfName = "kimapp_newreport.pdf"
-//            // 从资源文件夹复制PDF到内部存储
-//            val originalPdfFile = File(filesDir, originalPdfName)
-//            if (!originalPdfFile.exists()) {
-//                resources.openRawResource(R.raw.kimapp_newreport).use { inputStream ->
-//                    FileOutputStream(originalPdfFile).use { outputStream ->
-//                        inputStream.copyTo(outputStream)
-//                    }
-//                }
-//            }
-//
-//            // 读取并修改PDF
-//            val newPdfName = "kimapp_newreport_1.pdf"
-//            val newPdfFile = File(filesDir, newPdfName)
-//
-//            try {
-//                val document = PDDocument.load(originalPdfFile)
-//                val page = document.getPage(0)
-//                val contentStream = PDPageContentStream(document, page, true, true)
-//
-//                // 在PDF中添加文本...
-//                val workTimeString = selectedValue_WorkTime?.toString() ?: "缺少工作时间"
-//                val carryString = selectedValue_carry?.toString() ?: "缺少搬运次数"
-//                val stateString = selectedValue_state?.toString() ?: "缺少状态信息"
-//                val cameraString = selectedValue_camera?.toString() ?: "缺少摄影信息"
-//
-//                // 添加内容到PDF
-//                contentStream.beginText()
-//                contentStream.setFont(PDType1Font.HELVETICA, 12f)
-//                contentStream.newLineAtOffset(50f, 650f)
-//                contentStream.showText(workTimeString)
-//                contentStream.newLineAtOffset(0f, -15f)
-//                contentStream.showText(carryString)
-//                contentStream.newLineAtOffset(0f, -15f)
-//                contentStream.showText(stateString)
-//                contentStream.newLineAtOffset(0f, -15f)
-//                contentStream.showText(cameraString)
-//                contentStream.endText()
-//                contentStream.close()
-//
-//                document.save(newPdfFile)
-//                document.close()
-//
-//                // 打开修改后的PDF文件
-//                val uri = FileProvider.getUriForFile(this, "com.example.kimapp_mainkl.fileprovider", newPdfFile)
-//                val intent = Intent(Intent.ACTION_VIEW)
-//                intent.setDataAndType(uri, "application/pdf")
-//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//                startActivity(intent)
-//
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//                // 处理错误
-//                Toast.makeText(this, "Error processing the PDF: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
-//            }
-//        }
+        imageButton_download.setOnClickListener {
+            // 假設你的 PDF 文件的 resource ID 是 R.raw.kimapp_newreport
+            val originalPath = copyPdfFromRawToInternalStorage(this, R.raw.kimapp_newreport, "kimapp_report")
+            val modifiedPath = filesDir.path + "/modified_report.pdf"
+
+            modifyPdf(originalPath, modifiedPath, selectedValue_WorkTime ?: 0, selectedValue_carry ?: 0, selectedValue_state ?: 0, selectedValue_camera ?: 0)
+
+            val file = File(modifiedPath)
+            val uri = FileProvider.getUriForFile(this, "com.example.kimapp_mainkl.fileprovider", file)
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.setDataAndType(uri, "application/pdf")
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+            startActivity(intent)
+        }
 
 }
+
+    fun finalLevel(workTime: Int, carry: Int, state: Int, camera: Int){
+        if (workTime != null && carry != null && state != null && camera != null) {
+            val Level :Int  = workTime * (carry + state + camera)
+            DataProvider.saveData("finalData",Level)
+            changeColor(Level)
+        }
+    }
 
     fun changeColor(Level: Int) {
         val centerText = findViewById<TextView>(R.id.txt_Level)
@@ -184,6 +143,42 @@ class ResultPage : AppCompatActivity() {
 
         fun setTextColor(color: Int, centerText: TextView) {
             centerText.setTextColor(color)
+        }
+
+        fun copyPdfFromRawToInternalStorage(context: Context, resourceId: Int, outputFileName: String): String {
+            val inputStream = context.resources.openRawResource(resourceId)
+            val outputPath = context.filesDir.path + "/" + outputFileName
+            val outputStream = FileOutputStream(outputPath)
+
+            inputStream.copyTo(outputStream)
+            inputStream.close()
+            outputStream.close()
+
+            return outputPath
+        }
+
+        fun modifyPdf(originalFilePath: String, outputFilePath: String, workTime: Int, carry: Int, state: Int, camera: Int,) {
+
+            val reader = PdfReader(originalFilePath)
+            val writer = PdfWriter(outputFilePath)
+            val pdf = PdfDocument(reader, writer)
+            val document = Document(pdf)
+
+            document.add(Paragraph("時間評級 $workTime").setFixedPosition(1, 328f, 505f, 100f))
+            document.add(Paragraph("姿態評級 $camera").setFixedPosition(1, 328f, 560f, 100f))
+            document.add(Paragraph("工作狀態評級 $state").setFixedPosition(1, 328f, 590f, 100f))
+            if(DataProvider.getData("Gender_Of_value")==0){
+                document.add(Paragraph("荷重評級女 $carry").setFixedPosition(1, 395f, 620f, 100f))
+            }else if (DataProvider.getData("Gender_Of_value")==1){
+                document.add(Paragraph("荷重評級男 $carry").setFixedPosition(1, 258f, 620f, 100f))
+            }
+            document.add(Paragraph("最後得分 ${DataProvider.getData("finalData")}").setFixedPosition(1, 395f, 465f, 100f))
+
+
+            document.close()
+            reader.close()
+            writer.close()
+
         }
 
 

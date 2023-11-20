@@ -10,10 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+        maven { url = uri("https://repo.itextsupport.com/android") }
     }
+
 }
 
 rootProject.name = "KimApp-mainKL"
 include(":app")
- 

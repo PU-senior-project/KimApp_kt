@@ -51,7 +51,8 @@
         app:layout_constraintVertical_bias="0.128" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/view"
+        android:layout_width="350dp"
         android:layout_height="350dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -59,23 +60,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         >
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="wrap_content"
-            android:layout_height="350dp"
-            android:background="@color/white"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--        <View-->
+<!--            android:id="@+id/view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="350dp"-->
+<!--            android:background="@color/white"-->
+<!--            android:paddingLeft="20dp"-->
+<!--            android:paddingRight="20dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-        </View>
+<!--        </View>-->
 
         <TextView
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工作狀態評級"
@@ -83,10 +86,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.045" />
+            app:layout_constraintVertical_bias="0.053" />
 
         <RadioGroup
             android:id="@+id/radiogroup_state"
@@ -94,34 +97,37 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintHorizontal_bias="0.108"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
-            app:layout_constraintVertical_bias="0.577">
+            app:layout_constraintVertical_bias="0.558">
 
             <RadioButton
+                android:textColor="@color/black"
                 android:id="@+id/radio_state_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:tag="0"
                 android:text=" 具備良好的人因條件"
-                android:tag="0"/>
+                android:textStyle="bold" />
 
             <RadioButton
+                android:textColor="@color/black"
                 android:id="@+id/radio_state_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:tag="1"
                 android:text=" 運動空間受限或不符合人因的條件"
-                android:tag="1"/>
+                android:textStyle="bold" />
 
             <RadioButton
+                android:textColor="@color/black"
                 android:id="@+id/radio_state_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:tag="2"
                 android:text=" 運動空間受限或重心不穩的荷重"
-                android:tag="2"/>
+                android:textStyle="bold" />
 
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>

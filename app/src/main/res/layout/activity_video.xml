@@ -8,25 +8,48 @@
     android:background="#2E2E2E"
     tools:context="com.example.kimapp_mainkl.VideoPage">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarback"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#2E2E2E"
-        android:contentInsetStart="72dp"
-        app:contentInsetStart="72dp"
-        app:contentInsetLeft="72dp"
-        app:contentInsetStartWithNavigation="72dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <!--        <ImageView-->
-        <!--            android:id="@+id/ivStatus"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:contentDescription="@null"-->
-        <!--            android:src="@drawable/no_target" />-->
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="60dp">
+
+        <ImageButton
+            android:id="@+id/imageButton_cameraback"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            app:layout_anchorGravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbarback"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?attr/actionBarSize"-->
+<!--        android:background="#2E2E2E"-->
+<!--        android:contentInsetStart="72dp"-->
+<!--        app:contentInsetStart="72dp"-->
+<!--        app:contentInsetLeft="72dp"-->
+<!--        app:contentInsetStartWithNavigation="72dp">-->
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"/>-->
+<!--        &lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:id="@+id/ivStatus"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:contentDescription="@null"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:src="@drawable/no_target" />&ndash;&gt;-->
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
 
     <RelativeLayout
@@ -179,5 +202,8 @@
             android:layout_marginBottom="14dp" />
 
     </RelativeLayout>
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
