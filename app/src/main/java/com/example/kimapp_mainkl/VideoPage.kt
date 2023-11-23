@@ -15,6 +15,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.app.ActionBar
+import android.os.Handler
+import android.os.Looper
 import androidx.core.app.NavUtils
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -109,11 +111,24 @@ class VideoPage : AppCompatActivity() {
         }
     }
 
+
+    private var seconds = 0
+    private lateinit var timerTextView: TextView
+    private var timerHandler: Handler = Handler(Looper.getMainLooper())
+    private val timerRunnable = object : Runnable {
+        override fun run() {
+            val time = "錄製時長: $seconds 秒"
+            timerTextView.text = time
+            seconds++
+            timerHandler.postDelayed(this, 1000)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video)
 
-        val downButton = findViewById<Button>(R.id.downButton)
+        val doneButton = findViewById<Button>(R.id.doneButton)
         val imageButton_cameraback = findViewById<ImageButton>(R.id.imageButton_cameraback)
 
 
@@ -122,9 +137,15 @@ class VideoPage : AppCompatActivity() {
             startActivity(intent);
         }
 
-        downButton.setOnClickListener {
-            val intent = Intent(this,SelectPage::class.java)
-            startActivity(intent);
+        doneButton.setOnClickListener {
+            if(seconds<10){
+                TimeDialog()
+            }else{
+                val intent = Intent(this,SelectPage::class.java)
+                startActivity(intent);
+                DataProvider.saveData("checkcamera_done",1)
+            }
+
         }
 
         /** 程序运行时保持屏幕常亮 */
@@ -166,6 +187,7 @@ class VideoPage : AppCompatActivity() {
         }
     }
 
+
     private fun startPoseClassification() {
         val shutterButton: Button = findViewById(R.id.button3)
         shutterButton.text = "拍攝中"
@@ -176,6 +198,10 @@ class VideoPage : AppCompatActivity() {
         label15Counter = 0
         label20Counter = 0
         missingCounter = 0
+        isPoseClassificationEnabled = true
+        timerTextView = findViewById(R.id.timerTextView)
+        seconds = 0
+        timerHandler.post(timerRunnable)
         isPoseClassificationEnabled = true
     }
 
@@ -197,6 +223,7 @@ class VideoPage : AppCompatActivity() {
                 DataProvider.saveData("selectedValue_camera",20)
             }
         }
+        timerHandler.removeCallbacks(timerRunnable)
         isPoseClassificationEnabled = false
     }
 
@@ -427,6 +454,14 @@ class VideoPage : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    private fun TimeDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("提醒")
+            .setMessage("錄影時長未超過10秒！請重新錄製。")
+            .setPositiveButton("確定", null)
+            .show()
     }
 
     class ErrorDialog : DialogFragment() {

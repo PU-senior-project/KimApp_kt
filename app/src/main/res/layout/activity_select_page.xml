@@ -136,10 +136,10 @@
             app:layout_constraintVertical_bias="0.25" />
 
         <TextView
-            android:id="@+id/number1"
+            android:id="@+id/number_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/1"
+            android:text="(0/1)"
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -216,10 +216,10 @@
             app:layout_constraintVertical_bias="0.55" />
 
         <TextView
-            android:id="@+id/number2"
+            android:id="@+id/number_gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/1"
+            android:text="(0/1)"
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -296,10 +296,10 @@
             app:layout_constraintVertical_bias="0.85" />
 
         <TextView
-            android:id="@+id/number3"
+            android:id="@+id/number_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/1"
+            android:text="(0/1)"
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"

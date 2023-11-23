@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AlertDialog
 
 class SelectMaterialPage_State : AppCompatActivity() {
+    private var hasSelectedstate = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_material_page_state)
@@ -26,8 +28,12 @@ class SelectMaterialPage_State : AppCompatActivity() {
         }
 
         select_material_page_state_next.setOnClickListener{
-            val intent = Intent(this,SelectMaterialPage_WorkTime::class.java);
-            startActivity(intent);
+            if (!hasSelectedstate) {
+                showIncompleteActionDialog()
+            }else{
+                val intent = Intent(this,SelectMaterialPage_WorkTime::class.java)
+                startActivity(intent)
+            }
         }
 
         radiogroup_state.setOnCheckedChangeListener { group, checkedId ->
@@ -35,7 +41,15 @@ class SelectMaterialPage_State : AppCompatActivity() {
             val selectedValue_state = selectedRadioButton.tag.toString()
             val selectedValue_state_int = selectedValue_state.toInt()
             DataProvider.saveData("selectedValue_state", selectedValue_state_int)
+            hasSelectedstate = true
         }
 
+    }
+    private fun showIncompleteActionDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("提醒")
+            .setMessage("請完成全部按鈕動作")
+            .setPositiveButton("確定", null)
+            .show()
     }
 }

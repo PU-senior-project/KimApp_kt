@@ -8,8 +8,10 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AlertDialog
 
 class SelectMaterialPage_carry_female : AppCompatActivity() {
+    private var hasSelectedCarry = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_material_page_carry_female)//用來顯示頁面Page.kt
@@ -26,8 +28,12 @@ class SelectMaterialPage_carry_female : AppCompatActivity() {
         }
 
         select_material_page_transport_next.setOnClickListener{
-            val intent = Intent(this,SelectMaterialPage_State::class.java);
-            startActivity(intent);
+            if (!hasSelectedCarry) {
+                showIncompleteActionDialog()
+            }else{
+                val intent = Intent(this,SelectMaterialPage_State::class.java)
+                startActivity(intent)
+            }
         }
 
         radiogroup_transport.setOnCheckedChangeListener { group, checkedId ->
@@ -35,7 +41,15 @@ class SelectMaterialPage_carry_female : AppCompatActivity() {
             val selectedValue_carry = selectedRadioButton.tag.toString()
             val selectedValue_carry_int = selectedValue_carry.toInt()
             DataProvider.saveData("selectedValue_carry", selectedValue_carry_int)
+            hasSelectedCarry = true
         }
 
+    }
+    private fun showIncompleteActionDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("提醒")
+            .setMessage("請完成全部按鈕動作")
+            .setPositiveButton("確定", null)
+            .show()
     }
 }

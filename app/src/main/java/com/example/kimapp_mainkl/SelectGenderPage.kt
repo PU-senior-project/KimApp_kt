@@ -25,12 +25,14 @@ class SelectGenderPage : AppCompatActivity() {
             DataProvider.saveData("Gender_Of_value", 0)
             val intent = Intent(this,SelectPage::class.java)
             startActivity(intent);
+            DataProvider.saveData("checkgender_done",1)
         }
 
         maleImageButton.setOnClickListener {
             DataProvider.saveData("Gender_Of_value", 1)
             val intent = Intent(this,SelectPage::class.java)
             startActivity(intent);
+            DataProvider.saveData("checkgender_done",1)
         }
 
     }

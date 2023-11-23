@@ -9,8 +9,10 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AlertDialog
 
 class SelectMaterialPage_WorkTime : AppCompatActivity() {
+    private var hasSelectedworktime = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_material_page_work_time)
@@ -32,26 +34,34 @@ class SelectMaterialPage_WorkTime : AppCompatActivity() {
         }
 
         select_material_page_worktime_next.setOnClickListener{
-            val intent = Intent(this,SelectPage::class.java);
-            startActivity(intent);
+            if (!hasSelectedworktime) {
+                showIncompleteActionDialog()
+            }else{
+                val intent = Intent(this,SelectPage::class.java)
+                startActivity(intent)
+                DataProvider.saveData("checkbutton_done",1)
+            }
         }
 
         radio_three_1.setOnClickListener { v ->
-            radiogroup_worktime_less5s.visibility = View.VISIBLE
-            radiogroup_worktime_more5s.visibility = View.GONE
-            radiogroup_worktime_more5min.visibility = View.GONE
+            radiogroup_worktime_less5s.visibility = View.VISIBLE//<5s
+            radiogroup_worktime_more5s.visibility = View.GONE//>5s
+            radiogroup_worktime_more5min.visibility = View.GONE//>5分鐘
+            hasSelectedworktime = false
         }
 
         radio_three_2.setOnClickListener { v ->
-            radiogroup_worktime_less5s.visibility = View.GONE
-            radiogroup_worktime_more5s.visibility = View.VISIBLE
-            radiogroup_worktime_more5min.visibility = View.GONE
+            radiogroup_worktime_less5s.visibility = View.GONE//<5s
+            radiogroup_worktime_more5s.visibility = View.VISIBLE//>5s
+            radiogroup_worktime_more5min.visibility = View.GONE//>5分鐘
+            hasSelectedworktime = false
         }
 
         radio_three_3.setOnClickListener { v ->
-            radiogroup_worktime_less5s.visibility = View.GONE
-            radiogroup_worktime_more5s.visibility = View.GONE
-            radiogroup_worktime_more5min.visibility = View.VISIBLE
+            radiogroup_worktime_less5s.visibility = View.GONE//<5s
+            radiogroup_worktime_more5s.visibility = View.GONE//>5s
+            radiogroup_worktime_more5min.visibility = View.VISIBLE//>5分鐘
+            hasSelectedworktime = false
         }
 
         radiogroup_worktime_less5s.setOnCheckedChangeListener { group, checkedId ->
@@ -59,6 +69,7 @@ class SelectMaterialPage_WorkTime : AppCompatActivity() {
             val selectedValue_WorkTime = selectedRadioButton.tag.toString()
             val selectedValue_WorkTime_int = selectedValue_WorkTime.toInt()
             DataProvider.saveData("selectedValue_WorkTime", selectedValue_WorkTime_int)
+            hasSelectedworktime = true
         }
 
         radiogroup_worktime_more5s.setOnCheckedChangeListener { group, checkedId ->
@@ -66,6 +77,7 @@ class SelectMaterialPage_WorkTime : AppCompatActivity() {
             val selectedValue_WorkTime = selectedRadioButton.tag.toString()
             val selectedValue_WorkTime_int = selectedValue_WorkTime.toInt()
             DataProvider.saveData("selectedValue_WorkTime", selectedValue_WorkTime_int)
+            hasSelectedworktime = true
         }
 
         radiogroup_worktime_more5min.setOnCheckedChangeListener { group, checkedId ->
@@ -73,7 +85,15 @@ class SelectMaterialPage_WorkTime : AppCompatActivity() {
             val selectedValue_WorkTime = selectedRadioButton.tag.toString()
             val selectedValue_WorkTime_int = selectedValue_WorkTime.toInt()
             DataProvider.saveData("selectedValue_WorkTime", selectedValue_WorkTime_int)
+            hasSelectedworktime = true
         }
 
+    }
+    private fun showIncompleteActionDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("提醒")
+            .setMessage("請完成全部按鈕動作")
+            .setPositiveButton("確定", null)
+            .show()
     }
 }

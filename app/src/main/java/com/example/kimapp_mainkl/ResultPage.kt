@@ -43,20 +43,20 @@ class ResultPage : AppCompatActivity() {
 
         finalLevel(selectedValue_WorkTime?: 0,selectedValue_carry ?: 0, selectedValue_state ?: 0, selectedValue_camera ?: 0)
 
-
-
-
         imageButton_retry.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent);
+            DataProvider.saveData("checkcamera_done",0)
+            DataProvider.saveData("checkgender_done",0)
+            DataProvider.saveData("checkbutton_done",0)
         }
 
         imageButton_download.setOnClickListener {
             // 假設你的 PDF 文件的 resource ID 是 R.raw.kimapp_newreport
             val originalPath = copyPdfFromRawToInternalStorage(this, R.raw.kimapp_newreport, "kimapp_report")
-            val modifiedPath = filesDir.path + "/modified_report.pdf"
+            val modifiedPath = filesDir.path + "/kimapp_report.pdf"
 
-            modifyPdf(originalPath, modifiedPath, selectedValue_WorkTime ?: 0, selectedValue_carry ?: 0, selectedValue_state ?: 0, selectedValue_camera ?: 0)
+            modifyPdf(originalPath, modifiedPath)
 
             val file = File(modifiedPath)
             val uri = FileProvider.getUriForFile(this, "com.example.kimapp_mainkl.fileprovider", file)
@@ -125,9 +125,6 @@ class ResultPage : AppCompatActivity() {
         }
     }
 
-
-
-
         fun setRingColor(color: Int) {
             val ringDrawable =
                 ContextCompat.getDrawable(this, R.drawable.green_circle) as GradientDrawable
@@ -157,23 +154,23 @@ class ResultPage : AppCompatActivity() {
             return outputPath
         }
 
-        fun modifyPdf(originalFilePath: String, outputFilePath: String, workTime: Int, carry: Int, state: Int, camera: Int,) {
+        fun modifyPdf(originalFilePath: String, outputFilePath: String) {
 
             val reader = PdfReader(originalFilePath)
             val writer = PdfWriter(outputFilePath)
             val pdf = PdfDocument(reader, writer)
             val document = Document(pdf)
 
-            document.add(Paragraph("時間評級 $workTime").setFixedPosition(1, 328f, 505f, 100f))
-            document.add(Paragraph("姿態評級 $camera").setFixedPosition(1, 328f, 560f, 100f))
-            document.add(Paragraph("工作狀態評級 $state").setFixedPosition(1, 328f, 590f, 100f))
             if(DataProvider.getData("Gender_Of_value")==0){
-                document.add(Paragraph("荷重評級女 $carry").setFixedPosition(1, 395f, 620f, 100f))
+                document.add(Paragraph("荷重評級女 ${DataProvider.getData("selectedValue_carry")}").setFixedPosition(1, 395f, 620f, 100f))
             }else if (DataProvider.getData("Gender_Of_value")==1){
-                document.add(Paragraph("荷重評級男 $carry").setFixedPosition(1, 258f, 620f, 100f))
+                document.add(Paragraph("荷重評級男 ${DataProvider.getData("selectedValue_carry")}").setFixedPosition(1, 258f, 620f, 100f))
             }
-            document.add(Paragraph("最後得分 ${DataProvider.getData("finalData")}").setFixedPosition(1, 395f, 465f, 100f))
 
+            document.add(Paragraph("工作狀態評級 ${DataProvider.getData("selectedValue_state")}").setFixedPosition(1, 328f, 590f, 100f))
+            document.add(Paragraph("姿態評級 ${DataProvider.getData("selectedValue_camera")}").setFixedPosition(1, 328f, 560f, 100f))
+            document.add(Paragraph("時間評級 ${DataProvider.getData("selectedValue_WorkTime")}").setFixedPosition(1, 328f, 505f, 100f))
+            document.add(Paragraph("最後得分 ${DataProvider.getData("finalData")}").setFixedPosition(1, 395f, 465f, 100f))
 
             document.close()
             reader.close()
