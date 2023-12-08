@@ -29,7 +29,21 @@
 
 ### 取得專案
 
+`git clone https://github.com/PU-senior-project/KimApp_kt.git`
+
 ### 進入到專題目錄
+
+### 進行依賴獲取
+
+`到build.gradle.kts裡點擊上方Sync Now即可獲取。`
+
+### 檢查設備
+
+至少要有一個設備(實體手機、虛擬機)能夠連接到您的開發機器。
+
+### 運行
+
+`點擊工具欄上的「Run」按鈕（一個綠色的三角形圖標），或者使用快捷鍵 Shift + F10 來運行您的應用。Android Studio 會自動編譯您的應用，並將其部署到選定的設備或模擬器上。`
 
 ## 技術
 - Kotlin 1.9.0-release-358
