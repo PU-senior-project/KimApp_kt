@@ -9,13 +9,19 @@
 
 1.主頁
 
-![替代文字](https://i.imgur.com/6abDBgg.png)
+![broke](https://i.imgur.com/UTypRrl.jpg)
 
 2.目標頁
 
+![broke](https://i.imgur.com/HoK8U1b.jpg)
+
 3.結果頁
 
+![broke](https://i.imgur.com/SDRXMHa.jpg)
+
 4.PDF報告書
+
+![broke](https://i.imgur.com/w2mKNvH.jpg)
 
 ## 安裝
 
