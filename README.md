@@ -25,7 +25,7 @@
 
 ## 安裝
 
-以下會引導您如何完成安裝專案至您的電腦上 Flutter sdk版本建議為: 3.13.0 Dart 版本建議為: 3.0.5
+以下會引導您如何完成安裝專案至您的電腦上 Kotlin 版本建議為: 1.9.0-release-358
 
 ### 取得專案
 
@@ -33,15 +33,13 @@
 git clone -b ft_Fan https://github.com/PU-senior-project/KimApp_kt.git
 ```
 
-### 進入到專題目錄
-
 ### 進行依賴獲取
 
 `到build.gradle.kts裡點擊上方Sync Now即可獲取。`
 
 ### 檢查設備
 
-至少要有一個設備(實體手機、虛擬機)能夠連接到您的開發機器。
+`至少要有一個設備(實體手機、虛擬機)能夠連接到您的開發機器。`
 
 ### 運行
 
@@ -50,6 +48,5 @@ git clone -b ft_Fan https://github.com/PU-senior-project/KimApp_kt.git
 ## 技術
 - Kotlin 1.9.0-release-358
 - Java SDK JavaVersion.VERSION_1_8
-- tflite
 - com.itextpdf.android:layout-android 和 com.itextpdf.android:kernel-android: 8.0.2
 - org.tensorflow:tensorflow-lite 系列: 2.14.0
