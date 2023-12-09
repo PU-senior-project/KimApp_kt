@@ -29,7 +29,7 @@ class OperationPage : AppCompatActivity() {
         recycler_view.addItemDecoration(itemDecoration)
 
         val imageList = listOf(
-            ImageItem(R.drawable.total)
+            ImageItem(R.drawable.done)
         )
 
         val adapter = cls_ImageAdapter(this,imageList)

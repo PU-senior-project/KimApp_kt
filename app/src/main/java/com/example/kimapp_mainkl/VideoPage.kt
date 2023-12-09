@@ -138,14 +138,17 @@ class VideoPage : AppCompatActivity() {
         }
 
         doneButton.setOnClickListener {
-            if(seconds<10){
-                TimeDialog()
+            if(DataProvider.getData("record_done") != 1){
+                RecordDoneDialog()
             }else{
-                val intent = Intent(this,SelectPage::class.java)
-                startActivity(intent);
-                DataProvider.saveData("checkcamera_done",1)
+                if(seconds<3){
+                    TimeDialog()
+                }else{
+                    val intent = Intent(this,SelectPage::class.java)
+                    startActivity(intent);
+                    DataProvider.saveData("checkcamera_done",1)
+                }
             }
-
         }
 
         /** 程序运行时保持屏幕常亮 */
@@ -155,7 +158,7 @@ class VideoPage : AppCompatActivity() {
         actionBar?.setHomeAsUpIndicator(upArrow)
 
         // 拍攝按鈕
-        val shutterButton: Button = findViewById(R.id.button3)
+        val shutterButton: Button = findViewById(R.id.recordbutton)
         shutterButton.setOnClickListener {
             if (isPoseClassificationEnabled) {
                 println("停止拍攝")
@@ -189,7 +192,7 @@ class VideoPage : AppCompatActivity() {
 
 
     private fun startPoseClassification() {
-        val shutterButton: Button = findViewById(R.id.button3)
+        val shutterButton: Button = findViewById(R.id.recordbutton)
         shutterButton.text = "拍攝中"
         poseLevel = "label_0"
         poseRegister = "label_0"
@@ -206,25 +209,26 @@ class VideoPage : AppCompatActivity() {
     }
 
     private fun stopPoseClassification() {
-        val shutterButton: Button = findViewById(R.id.button3)
+        val shutterButton: Button = findViewById(R.id.recordbutton)
         shutterButton.text = "拍攝"
         println(poseLevel)
         when{
             poseLevel == "label_0"->{
-                DataProvider.saveData("selectedValue_camera",0)
+                DataProvider.saveData("selectedValue_camera",1)
             }
             poseLevel == "label_5"->{
-                DataProvider.saveData("selectedValue_camera",5)
+                DataProvider.saveData("selectedValue_camera",2)
             }
             poseLevel == "label_15"->{
-                DataProvider.saveData("selectedValue_camera",10)
+                DataProvider.saveData("selectedValue_camera",4)
             }
             poseLevel == "label_20"->{
-                DataProvider.saveData("selectedValue_camera",20)
+                DataProvider.saveData("selectedValue_camera",8)
             }
         }
         timerHandler.removeCallbacks(timerRunnable)
         isPoseClassificationEnabled = false
+        DataProvider.saveData("record_done",1)//判斷錄影是否結束
     }
 
     override fun onStart() {
@@ -286,7 +290,7 @@ class VideoPage : AppCompatActivity() {
                                         poseRegister = "label_0"
 
                                         /** 設定姿態為 label_0 */
-                                        if (label0Counter > 30 && poseLevel != "label_20" && poseLevel != "label_15" && poseLevel != "label_5") {
+                                        if (label0Counter > 15 && poseLevel != "label_20" && poseLevel != "label_15" && poseLevel != "label_5") {
                                             poseLevel = "label_0"
                                         }
 
@@ -307,7 +311,7 @@ class VideoPage : AppCompatActivity() {
                                         poseRegister = "label_5"
 
                                         /** 設定姿態為 label_5 */
-                                        if (label5Counter > 30 && poseLevel != "label_20" && poseLevel != "label_15") {
+                                        if (label5Counter > 15 && poseLevel != "label_20" && poseLevel != "label_15") {
                                             poseLevel = "label_5"
                                         }
 
@@ -328,7 +332,7 @@ class VideoPage : AppCompatActivity() {
                                         poseRegister = "label_15"
 
                                         /** 設定姿態為 label_15 */
-                                        if (label15Counter > 30 && poseLevel != "label_20") {
+                                        if (label15Counter > 15 && poseLevel != "label_20") {
                                             poseLevel = "label_15"
                                         }
 
@@ -349,7 +353,7 @@ class VideoPage : AppCompatActivity() {
                                         poseRegister = "label_20"
 
                                         /** 設定姿態為 label_20 */
-                                        if (label20Counter > 30) {
+                                        if (label20Counter > 15) {
                                             poseLevel = "label_20"
                                         }
                                         /** 顯示 Debug 訊息 */
@@ -459,7 +463,15 @@ class VideoPage : AppCompatActivity() {
     private fun TimeDialog() {
         androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("提醒")
-            .setMessage("錄影時長未超過10秒！請重新錄製。")
+            .setMessage("錄影時長未超過3秒！請重新錄製。")
+            .setPositiveButton("確定", null)
+            .show()
+    }
+
+    private fun RecordDoneDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("提醒")
+            .setMessage("拍攝未停止。請暫停錄影後提交再次嘗試。")
             .setPositiveButton("確定", null)
             .show()
     }
