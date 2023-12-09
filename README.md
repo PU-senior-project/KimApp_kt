@@ -29,7 +29,9 @@
 
 ### 取得專案
 
-`git clone -b ft_Fan https://github.com/PU-senior-project/KimApp_kt.git`
+```
+git clone -b ft_Fan https://github.com/PU-senior-project/KimApp_kt.git
+```
 
 ### 進入到專題目錄
 
